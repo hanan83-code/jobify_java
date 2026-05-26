@@ -1,0 +1,29 @@
+# Node
+jobify-frontend/node_modules/
+jobify-frontend/build/
+
+# Maven
+jobify-backend/target/
+jobify-backend/*.iml
+.mvn/
+
+# IDE
+.idea/
+.vscode/
+.kiro/
+*.class
+
+# Env / Secrets
+.env
+*.env
+
+# Uploads (user-generated files)
+jobify-backend/uploads/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Zip artifacts
+jobify-frontend/src/components.zip
+jobify-frontend/src/pages.zip
