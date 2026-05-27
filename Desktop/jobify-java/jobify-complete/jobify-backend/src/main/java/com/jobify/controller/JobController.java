@@ -207,11 +207,13 @@ public class JobController {
         Job job = jobRepository.findById(id).orElse(null);
         if (job == null) return ResponseEntity.notFound().build();
 
-        if (user.getRole() != User.Role.EMPLOYER) {
+        if (user.getRole() == User.Role.EMPLOYER) {
             Company company = companyRepository.findByUserId(user.getId()).orElse(null);
             if (company == null || !company.getId().equals(job.getCompany().getId())) {
                 return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Forbidden");
             }
+        } else {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Employer role required");
         }
 
         try {

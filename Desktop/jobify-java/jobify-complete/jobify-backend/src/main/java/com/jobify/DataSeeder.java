@@ -131,8 +131,7 @@ public class DataSeeder {
             }
 
             // keep seeded accounts referenced
-            if (seeker.getId() == null)
-                throw new IllegalStateException("Seeder failed");
+            System.out.println("DataSeeder: seeded employer id=" + employer.getId() + ", seeker id=" + seeker.getId());
         };
     }
 }

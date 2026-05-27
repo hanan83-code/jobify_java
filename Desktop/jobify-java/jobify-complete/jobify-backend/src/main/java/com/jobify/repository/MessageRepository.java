@@ -26,18 +26,15 @@ public interface MessageRepository extends JpaRepository<Message, Long> {
     List<Message> findByApplicationIdOrderBySentAtAsc(Long applicationId);
 
     // Inbox: latest message per conversation partner for a user
-    @Query("""
-            SELECT m FROM Message m
+    @Query(value = """
+            SELECT * FROM messages m
             WHERE m.id IN (
-                SELECT MAX(m2.id) FROM Message m2
-                WHERE m2.recipient.id = :userId OR m2.sender.id = :userId
-                GROUP BY CASE
-                    WHEN m2.sender.id = :userId THEN m2.recipient.id
-                    ELSE m2.sender.id
-                END
+                SELECT MAX(m2.id) FROM messages m2
+                WHERE m2.recipient_id = :userId OR m2.sender_id = :userId
+                GROUP BY LEAST(m2.sender_id, m2.recipient_id), GREATEST(m2.sender_id, m2.recipient_id)
             )
-            ORDER BY m.sentAt DESC
-            """)
+            ORDER BY m.sent_at DESC
+            """, nativeQuery = true)
     Page<Message> findInbox(@Param("userId") Long userId, Pageable pageable);
 
     long countByRecipientIdAndIsReadFalse(Long recipientId);
