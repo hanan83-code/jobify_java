@@ -11,6 +11,9 @@ jobify-backend/*.iml
 .idea/
 .vscode/
 .kiro/
+.windsurf/
+.cursor/
+.copilot/
 *.class
 
 # Env / Secrets
@@ -19,6 +22,13 @@ jobify-backend/*.iml
 
 # Uploads (user-generated files)
 jobify-backend/uploads/
+
+# H2 database files
+jobify-backend/data/
+
+# Crash logs
+hs_err_pid*.log
+replay_pid*.log
 
 # OS
 .DS_Store
